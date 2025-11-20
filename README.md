@@ -10,3 +10,30 @@ In this project, Loan-Approval-Prediction-Dataset is used. Download it from [her
 # Result
 Best Model: Random Forest
 AUC-ROC: 90%
+
+# Installation
+**1.If you do not have pipenv installed already, you can install it by with the command**
+```
+    pip install pipenv
+```
+**2.Clone this repository:**
+```
+git clone https://github.com/Uthmanee/machine-learning-zoomcamp-midterm-project.git
+cd script
+```
+**3.Install all dependencies/packages mentioned in the **Pipfile** within the new virtual environment being created (as pipenv will prioritize Pipfile, requirements.txt has not been used)
+```
+pipenv install
+```
+**4.Build the Docker Image:**
+
+Use the following command to build the Docker image
+```
+docker build -t loan-default .
+```
+**5.Run the Docker Container**
+
+Start the container using
+```
+docker run -p 9696:9696 loan-default
+```
