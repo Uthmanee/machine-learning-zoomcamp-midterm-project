@@ -1,20 +1,30 @@
-import numpy as np
 import pickle
+from flask import Flask
+from flask import request
+from flask import jsonify
 
-with open('model.bin', 'rb') as f_in:
+model_file = 'model.bin'
+
+with open(model_file, 'rb') as f_in:
     dv, model = pickle.load(f_in)
 
-X_val = {'person_age': 23,
- 'person_income': 28000,
- 'person_home_ownership': 'rent',
- 'person_emp_length': 2.0,
- 'loan_intent': 'education',
- 'loan_grade': 'c',
- 'loan_amnt': 12000,
- 'loan_int_rate': 14.27,
- 'loan_status': 1,
- 'loan_percent_income': 0.43,
- 'cb_person_cred_hist_length': 4}
+app = Flask('loan_default')
 
-X_val_transformed = dv.transform([X_val])
-print(model.predict_proba(X_val_transformed)[:, 1])
+@app.route('/predict', methods=['POST'])
+def predict():
+    customer = request.get_json()
+
+    X = dv.transform([customer])
+    y_pred = model.predict_proba(X)[0, 1]
+    loan_default = y_pred >= 0.5
+
+    result = {
+        'loan_probability': float(y_pred),
+        'loan_default': bool(loan_default)
+    }
+
+    return jsonify(result)
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=9696)
