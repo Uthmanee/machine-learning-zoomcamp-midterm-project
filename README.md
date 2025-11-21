@@ -16,21 +16,25 @@ Best Model: Random Forest
 AUC-ROC: 90%
 
 ### Installation & Setup
-**1.Clone this repository:**
+**1. Clone this repository:**
 ```
 git clone https://github.com/Uthmanee/machine-learning-zoomcamp-midterm-project.git
 cd script
 ```
-**2.Install Pipenv (if not already installed)**
+**2. Install Pipenv (if not already installed)**
 ```
     pip install pipenv
 ```
 ## Run locally (without docker)
-**1.Install all dependencies/packages mentioned in the **Pipfile** within the new virtual environment being created (Recommended)**
+**1. Install all dependencies/packages mentioned in the **Pipfile** within the new virtual environment being created (Recommended)**
 ```
 pipenv install
 ```
-**2.Run the flask server**
+or, if you prefer to install from requirements.txt:
+```
+pipenv install -r requirements.txt
+```
+**2. Run the flask server**
 ```
 # Enter the virtual environment by running the command below in the root directory
 pipenv shell
@@ -42,13 +46,13 @@ python predict.py
 python predict_test.py
 ```
 ## Docker Usage
-**1.Build the Docker Image:**
+**1. Build the Docker Image:**
 
 Use the following command to build the Docker image
 ```
 docker build -t loan-default .
 ```
-**2.Run the Docker Container**
+**2. Run the Docker Container**
 
 Start the container using
 ```
