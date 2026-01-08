@@ -8,8 +8,8 @@ COPY ["Pipfile", "Pipfile.lock", "./"]
 
 RUN pipenv install --deploy --system
 
-COPY ["*.py", "churn-model.bin", "./"]
+COPY script/*.py script/model.bin ./
 
 EXPOSE 9696
 
-ENTRYPOINT ["gunicorn", "--bind=0.0.0.0:9696", "churn_serving:app"]
+ENTRYPOINT ["gunicorn", "--bind=0.0.0.0:9696", "predict:app"]
